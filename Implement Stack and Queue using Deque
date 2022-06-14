@@ -1,0 +1,143 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+struct DqueNode{
+    int value;
+    DqueNode* next;
+    DqueNode prev;
+};
+
+class Deque{
+    private:
+    
+    DqueNode *head;
+    DqueNode *tail;
+    
+    public:
+    
+    Deque(){
+        head=tail=NULL;
+    }
+    
+    bool isEmpty(){
+        if(head==NULL){
+            return true;
+        }
+        return false;
+    }
+    int size(){
+        if(isEmpty()){
+            return 0;
+        }
+        DqueNode* temp=head;
+        
+        int len=0;
+        while(temp!=NULL){
+            len++;
+            temp=temp->next;
+        }
+        return len;
+    }
+    
+    //for stack
+    void insertAtFirst(int x){
+        DqueNode* temp=new DqueNode[sizeof(DqueNode)];
+        temp->value=x;
+        
+        if(head==NULL){
+            head=tail=temp;
+            temp->next=temp->prev=NULL;
+        }
+        else{
+            head->prev=temp;
+            temp->next=head;
+            temp->prev=NULL;
+            head=temp;
+        }
+    }
+    
+    //for queue 
+    void insertAtLast( int x){
+        DqueNode* temp=new DqueNode[sizeof(DqueNode)];
+        temp->value=x;
+        
+        if(head==NULL){
+            head=tail=temp;
+            temp->next=temp->prev=NULL;
+        }
+        else{
+            tail->next=temp;
+            temp->next=NULL;
+            temp->prev=tail;
+            tail=temp;
+        }
+    }
+    
+    void removeFirst(){
+        if(isEmpty){
+            cout<<"List is Empty"<<endl;
+        }
+        else{
+            DqueNode* temp=head;
+            head=head->next;
+            if(head)
+            head->prev=NULL;
+            delete temp;
+            if(head==NULL){
+                tail=NULL;
+            }
+        }
+        return;
+    }
+    
+    void removeLast(){
+        if(isEmpty){
+            cout<<"List is Empty"<<endl;
+        }
+        else{
+            DqueNode* temp=tail;
+            tail=tail->prev;
+            if(tail)
+            tail->next=NULL;
+            delete temp;
+            if(tail==NULL){
+                head=NULL;
+            }
+        }
+        return;
+    }
+    
+    void display()
+    {
+        if(!isEmpty()){
+            DqueNode* temp=head;
+            while(temp!=NULL){
+                cout<<temp->value<<" ";
+                temp=temp->next;
+            }
+            cout<<endl;
+            return;
+        }
+        cout<<"List is Empty"<<endl;
+    }
+};
+
+class Stack: public Deque{
+    public:
+    void push(int x){
+        insertAtLast(x);
+    }
+    void pop(){
+        removeLast();
+    }
+};
+
+class Queue: public Deque{
+    public:
+    void enqueue(int x){
+        insertAtFirst(x);
+    }
+    void dequeue(){
+        removeFirst();
+    }
+};
