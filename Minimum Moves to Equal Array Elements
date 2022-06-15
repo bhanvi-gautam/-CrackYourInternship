@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int minMoves(vector<int>& nums) {
+       /*We have to increment n-1 elements by 1 to make them equal. This is equal to decrementing only 1 element by 1. Since we need to make all the elements equal we can consider he given problem to be equal to decrementing all the elements by 1 in each move until they are equal to the minimum element in the array.
+       For example:
+if the given array is [5,6,7,8] then the minimum value is 5. Substracting it from all the values given in the array will give us 5-5 + 6-5 + 7-5 + 8-5 =0 + 1 + 2 + 3 = 6.
+Conclusion - We are just reversing the problem to make it simpler :)
+*/
+
+        int m=INT_MAX;
+        //getting the min
+        for(int n:nums){
+            m=min(m,n);
+        }
+        int ans=0;
+        
+        for(int n:nums)
+            ans+=n-m;
+        
+        return ans;
+    }
+};
