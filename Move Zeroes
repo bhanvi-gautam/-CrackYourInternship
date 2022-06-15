@@ -1,0 +1,18 @@
+    class Solution {
+    public:
+    
+    //snowball approach ....as we encounter 0 ...size of snowball will increase
+        void moveZeroes(vector<int>& nums) {
+            int snowBalls=0;
+            for(int i=0;i<nums.size();i++){
+                if(nums[i]==0){
+                    snowBalls++;
+                }
+                else if(snowBalls>0){
+                    int t=nums[i];
+                    nums[i]=0;
+                    nums[i-snowBalls]=t;
+                }
+            }
+        }
+    };
