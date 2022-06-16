@@ -1,0 +1,59 @@
+ /*
+ Node is defined as
+  struct Node {
+    int data;
+    struct Node *next;
+    Node(int x) {
+        data = x;
+        next = NULL;
+    }
+};
+
+*/
+class Solution
+{
+    public:
+    //Function to sort a linked list of 0s, 1s and 2s.
+    Node* segregate(Node *head) {
+        if(head==NULL && head->next==NULL){
+            return head;
+        }
+        int zeroes=0;
+        int ones=0;
+        int twos=0;
+        Node* temp=head;
+        Node* temp1=head;
+        
+        while(temp!=NULL){
+            if(temp->data ==0){
+                zeroes++;
+            }
+            else if(temp->data ==1){
+                ones++;
+            }
+            else{
+                twos++;
+            }
+            temp=temp->next;
+        }
+        
+        while(temp1!=NULL){
+            while(zeroes--){
+                temp1->data=0;
+                temp1=temp1->next;
+            }
+            while(ones--){
+                temp1->data=1;
+                temp1=temp1->next;
+            }
+            while(twos--){
+                temp1->data=2;
+                temp1=temp1->next;
+            }
+        }
+        return head;
+        
+        // Add code here
+        
+    }
+};
