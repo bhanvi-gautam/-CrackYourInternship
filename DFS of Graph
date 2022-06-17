@@ -1,0 +1,27 @@
+ void dfsrec(vector<int> adj[],int i,vector<bool>&visited, vector<int>&ans)
+    {  
+        if(visited[i])return;
+        visited[i]=true;
+        ans.push_back(i);
+        for( int u:adj[i])
+        {
+            if(visited[u]==false)
+            {
+                dfsrec(adj,u,visited,ans);
+            }
+        }
+    }
+    vector<int> dfsOfGraph(int V, vector<int> adj[]) {
+        // Code here
+         vector<int>ans;
+        vector<bool>visited(V,false);
+       for(int i=0;i<V;i++)
+        {
+            if(visited[i]==false)
+            {
+                dfsrec(adj,i,visited,ans);
+            }
+        }
+        
+        return ans;
+    }
