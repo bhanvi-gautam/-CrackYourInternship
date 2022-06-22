@@ -1,0 +1,39 @@
+  class Solution{
+  public:
+  
+  bool checkForCycle(int node,vector<int> adj[],vector<int> &vis){
+      queue<pair<int,int>> q;
+      q.push({node,-1});
+      vis[node]=1;
+      
+      while(!q.empty()){
+          int nod=q.front().first;
+          int par=q.front().second;
+          q.pop();
+          
+          for(auto it:adj[nod]){
+              if(vis[it]==0){
+                  vis[it]=1;
+                  q.push({it,nod});
+              }
+              else if(vis[it]==1 && par !=it){
+                  return true;
+              }
+          }
+      }
+      return false;
+  }
+    // Function to detect cycle in an undirected graph.
+    bool isCycle(int V, vector<int> adj[]) {
+        // Code here
+        vector<int> vis(V+1,0);
+        for(int i=0;i<V;i++){
+            if(vis[i]==0){
+                if(checkForCycle(i,adj,vis)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+};
