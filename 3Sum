@@ -1,0 +1,44 @@
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        //sum==-k
+        vector<vector<int>> res;
+        if(nums.size()<3){
+            return res;
+        }
+        sort(nums.begin(),nums.end());
+        
+        for(int i=0;i<nums.size();i++){
+            int target=-nums[i];
+            int s=i+1;
+            int e=nums.size()-1;
+            
+            while(s<e){
+                int sum=nums[s]+nums[e];
+                if(sum<target){
+                    s++;
+                }
+                else if(sum>target){
+                    e--;
+                }
+                else{
+                    vector<int> triplet={nums[i],nums[s],nums[e]};
+                    res.push_back(triplet);
+                    
+                    //for duplicates of number two
+                    //increasing s
+                    while(s<e && nums[s]==triplet[1])
+                        s++;
+                    //for duplicates of number three
+                    //decreasing e
+                    while(s<e && nums[e]==triplet[2])
+                        e--;                     
+                }
+            }
+             //for duplicates of number one
+            while(i+1<nums.size() && nums[i+1]==nums[i])
+                i++;
+        }
+        return res;
+    }
+};
