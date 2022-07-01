@@ -1,0 +1,25 @@
+class Solution
+{
+    public:
+    //Function to find the smallest positive number missing from the array.
+    int missingNumber(int arr[], int n) 
+    { 
+        // Your code here
+        // sort(arr,arr+n);
+        
+        unordered_map<int,int>mp;
+        
+        for(int i=0;i<n;i++){
+            mp[arr[i]]++;
+        }
+        int count=1;
+        for(int i=0;i<=n;i++){
+            if(mp[count]==0){
+                return count;
+            }
+            count++;
+            
+        }
+        return count++;
+    } 
+};
