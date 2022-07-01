@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int distance(int a,int b){
+        int a1=a*a;
+        int b1=b*b;
+        return sqrt(a1+b1);
+    }
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
+       priority_queue<pair<int,int>> pq;
+        int i=0;
+        //min elements will be popped out and only k greater elements will be left
+        for(auto it:points){
+            int x = it[0]*it[0] + it[1]*it[1];
+        pq.push({x, i});
+        if(pq.size() > k) pq.pop();
+        i++;
+        }
+        
+        vector<vector<int>> res;
+    while(!pq.empty()) {
+        int i = pq.top().second;
+        res.push_back({points[i][0], points[i][1]});
+        pq.pop();
+    }
+    return res;
+    }
+};
