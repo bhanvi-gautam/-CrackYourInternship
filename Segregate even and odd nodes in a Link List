@@ -1,0 +1,23 @@
+class Solution{
+public:
+    Node* divide(int N, Node *head){
+       // code here
+        vector<int> v;
+        Node *t=head;
+        while(t!=NULL)
+        {
+            v.push_back(t->data);
+            t=t->next;
+        }
+        stable_partition(v.begin(),v.end(),[](int i){return i%2==0;});
+        t=head;
+        int i=0;
+        while(t!=NULL)
+        {
+            t->data=v[i];
+            i++;
+            t=t->next;
+        }
+        return head;
+    }
+};
