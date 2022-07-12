@@ -1,0 +1,35 @@
+Node* rev(Node* head){
+   if(head == NULL || head->next == NULL){
+       return head;
+   }
+   Node* nhead=rev(head->next);
+   head->next->next=head;
+   head->next=NULL;
+   return nhead;
+}
+
+void reorderList(Node* root) {
+   // Your code here
+   if(root == NULL || root->next == NULL){
+    return;
+}
+Node* slow=root;
+Node* fast=slow->next;
+Node* temp=root;
+while(fast != NULL && fast->next != NULL){
+    slow=slow->next;
+    fast=fast->next->next;
+}
+Node* temp2=slow->next;
+slow->next=NULL;
+temp2=rev(temp2);
+Node* nxt=temp2;
+while(temp != NULL && temp2 != NULL){
+       nxt=temp;
+       temp=temp->next;
+       nxt->next=temp2;
+       nxt=temp2;
+       temp2=temp2->next;
+       nxt->next=temp;
+    }
+}
