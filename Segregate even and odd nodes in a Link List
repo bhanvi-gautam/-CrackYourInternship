@@ -1,6 +1,12 @@
 class Solution{
 public:
     Node* divide(int N, Node *head){
+    /*
+    The stable_partition( ) algorithm arranges the sequence defined by start and end 
+    such that all elements for which the predicate specified by pfn returns true come 
+    before those for which the predicate returns false. The partitioning is stable. 
+    This means that the relative ordering of the sequence is preserved.
+    */
        // code here
         vector<int> v;
         Node *t=head;
