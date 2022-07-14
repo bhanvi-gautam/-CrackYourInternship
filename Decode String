@@ -1,0 +1,47 @@
+class Solution {
+public:
+    string decodeString(string s) {
+        stack<string> st; // stack to maintain string of characters
+        for(auto& c:s){
+            if(c==']'){ //  we need to duplicate the strings between the brackets
+                string temp = "",curr = ""; // temp finally stores all the strings between the brackets
+                while(!st.empty() and st.top()!="["){
+                    reverse(st.top().begin(),st.top().end());
+                    temp += st.top(); // temp picks up each string from stack
+                    st.pop();
+                }
+                st.pop(); // pop the opening bracket
+                string times = ""; // stores the string representation of number of times we need to duplicate
+                while(!st.empty() and st.top()>="0" and st.top()<="9"){
+                    times += st.top();
+                    st.pop();
+                }
+                reverse(times.begin(),times.end());
+                reverse(temp.begin(),temp.end());
+                int k = stoi(times); // k = number of times we need to duplicate
+                while(k--)
+                    curr += temp;
+                // curr stores the duplicated string
+                // push string back into stack
+                if(!st.empty() and st.top()!="[")
+                    st.top() += curr;  
+                else
+                    st.push(curr);
+            }
+            else{
+                string curr = "";
+                curr.push_back(c);
+                st.push(curr); // push the string representation of the character into the stack
+            }
+        }
+        string ans = ""; // stores the final answer
+        while(!st.empty()){
+            reverse(st.top().begin(),st.top().end());
+            ans += st.top();
+            st.pop();
+        }
+        reverse(ans.begin(),ans.end());
+        return ans;
+    }
+    
+};
