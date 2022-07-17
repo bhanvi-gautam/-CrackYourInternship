@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int kthFactor(int n, int k) {
+        priority_queue<int,vector<int> ,greater<int>>pq;
+        for(int i=1;i<=n;i++){
+            if(n%i==0){
+                // cout<<i<<" ";
+                pq.push(i);
+            }
+        }
+        int x=k-1;
+        while(x-- && !pq.empty()){
+            pq.pop();
+        }
+        if(pq.empty())
+            return -1;
+        else
+            return pq.top();
+    }
+};
