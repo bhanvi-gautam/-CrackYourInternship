@@ -1,6 +1,6 @@
 class Solution {
 public:
-    // converting to -1 (or -2) in order to compare with their abs value
+    // converting to 2 (or -2) in order to compare with their abs value
     void gameOfLife(vector<vector<int>>& board) {
        int n = board.size(), m = board[0].size();
         for(int i=0; i<n; i++){
