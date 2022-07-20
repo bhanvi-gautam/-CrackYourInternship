@@ -1,0 +1,16 @@
+bool helper(Node* root,int mnn,int mxx){
+    if(!root){
+        return false;
+    }
+    if(mnn==mxx){
+        return true;
+    }
+    
+    return helper(root->left,mnn,root->data-1) || helper(root->right,root->data+1,mxx);
+}
+
+bool isDeadEnd(Node *root)
+{
+    //Your code here
+    return helper(root,1,INT_MAX);
+}
