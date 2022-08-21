@@ -1,0 +1,54 @@
+class Solution
+{
+	public:
+	void topo(vector<int> adj[], vector<bool> &visited, int src, stack<int> &st){
+	    visited[src]=true;
+	    
+	    for(auto it: adj[src]){
+	        if(visited[it]==false){
+	            topo(adj,visited,it,st);
+	        }
+	    }
+	    st.push(src);
+	}
+	
+	void dfs(vector<int> adj[],vector<bool> &visited,int src){
+	    visited[src]=true;
+	    for(auto it: adj[src]){
+	        if(visited[it]==false){
+	            dfs(adj,visited,it);
+	        }
+	    }
+	}
+	//Function to find number of strongly connected components in the graph.
+    int kosaraju(int V, vector<int> adj[])
+    {
+        //code here
+        int ans=0;
+        stack<int> st;
+        vector<bool> visited(V,false);
+        for(int i=0;i<V;i++){
+            if(visited[i]==false){
+                topo(adj,visited,i,st);
+            }
+        }
+        //reverse edge of graph
+        vector<int> adj2[V];
+        for(int i=0;i<V;i++){
+            for(auto it: adj[i]){
+                adj2[it].push_back(i);
+            }
+        }
+        fill(visited.begin(),visited.end(),false);
+        //call for second dfs from stack's top
+        while(!st.empty()){
+            int i=st.top();
+            st.pop();
+            if(visited[i]==false){
+                ans++;
+                dfs(adj2,visited,i);
+            }
+        }
+        return ans;
+    }
+};
